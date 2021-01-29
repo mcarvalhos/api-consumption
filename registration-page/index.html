@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Page</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+
+  <body class="bg-dark text-light">
+    <main>
+      <div class="container col-md-10 col-lg-6 mt-5 mb-5">
+        <form action="" class="container p-5 rounded shadow" id="formulario">
+          <h1>Cadastro</h1>
+          <br />
+          <h2 class="text-warning">Dados pessoais</h2>
+          <hr class="bg-warning mt-0 pt-0" />
+          <div class="form-group">
+            <label for="fullNameInput">Nome completo</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="fullNameInput"
+            />
+            <span class="error"></span>
+          </div>
+          <div class="form-group">
+            <label for="dateBirthInput">Data de nascimento</label>
+            <input
+              required
+              type="date"
+              class="form-control"
+              id="dateBirthInput"
+            />
+            <span class="error"></span>
+          </div>
+          <div class="form-group">
+            <label for="cpfInput">CPF</label>
+            <input
+              required
+              type="number"
+              class="form-control"
+              id="cpfInput"
+              maxlength="15"
+            />
+            <span class="error"></span>
+          </div>
+          <div class="form-group">
+            <label for="cellPhoneInput">Celular</label>
+            <input
+              required
+              type="number"
+              class="form-control"
+              id="cellPhoneInput"
+              maxlength="11"
+            />
+            <span class="error"></span>
+          </div>
+          <div class="form-group">
+            <label for="emailInput">E-mail</label>
+            <input required type="email" class="form-control" id="emailInput" />
+            <span class="error"></span>
+          </div>
+          <br />
+          <h2 class="text-warning">Endereço</h2>
+          <hr class="bg-warning mt-0 pt-0" />
+
+          <div class="form-group">
+            <label for="cep">CEP</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              maxlength="9"
+              id="cep"
+            />
+            <span class="error"></span>
+          </div>
+          <div class="form-group">
+            <label for="logradouro">Logradouro</label>
+            <input required type="text" class="form-control" id="logradouro" />
+            <span class="error"></span>
+          </div>
+          <div class="form-group">
+            <label for="numberInput">Número</label>
+            <input
+              required
+              type="number"
+              class="form-control"
+              id="numberInput"
+            />
+            <span class="error"></span>
+          </div>
+          <div class="form-group">
+            <label for="complementInput">Complemento</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="complementInput"
+            />
+            <span class="error"></span>
+          </div>
+          <div class="form-group">
+            <label for="bairro">Bairro</label>
+            <input required type="text" class="form-control" id="bairro" />
+            <span class="error"></span>
+          </div>
+          <div class="form-group">
+            <label for="cidade">Cidade</label>
+            <input required type="text" class="form-control" id="cidade" />
+            <span class="error"></span>
+          </div>
+          <div class="form-group">
+            <label for="estado">UF</label>
+            <input required type="text" class="form-control" id="estado" />
+            <span class="error"></span>
+          </div>
+          <div class="form-group">
+            <label for="descriptionInput">Descrição</label>
+            <input
+              required
+              type="text"
+              class="form-control"
+              id="descriptionInput"
+            />
+            <span class="error"></span>
+          </div>
+          <button type="submit" class="btn bg-warning text-white mt-4">
+            Enviar
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/validationForm.js"></script>
+    <script src="js/cepSearch.js"></script>
+  </body>
+</html>
