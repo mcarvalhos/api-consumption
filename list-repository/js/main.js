@@ -1,55 +1,66 @@
-const search = document.getElementById("search");
-const url = "https://api.github.com/orgs/";
-const uri = "/repos";
+//1. Inicialização da página
+$(function () {
+  const t = $("#tabelaZik").DataTable(); //2. transforma em datatable
 
-const getRepository = async (repos) => {
-  const reposResponse = await fetch(`${url}${repos}${uri}?per_page=20?created: desc`)
-    .then((response) => {
-      if (!response.ok)
-        throw new Error("Erro ao executar requisição " + response.status);
-      return response.json();
-    })
-    .then((repos) => {
-      showRepos(repos)
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
-};
+  const getRepositories = async (repository) => {
+    const url = `https://api.github.com/orgs/${repository}/repos`;
 
-function showRepos(repos) {
-  let element = document.getElementById("element");
+    const reposResponse = await fetch(url.replace("{repository}", repository)) //5. Monta a URL
+      .then((response) => {
+        if (!response.ok)
+          alert("Erro ao executar requisição: " + response.status);
+        return response.json();
+      })
+      .then((resp) => {
+        //6. Recebeu resposta
 
-  for (const repo of repos) {
-    element.innerHTML += `
-      <div class="card card-body mb-2">
-        <div class="row">
-          <div class="col-md-6">
-            <a href="${repo.html_url}" target="blank">${repo.name}</a>
-          </div>
-          <div class="col-md-6">
-            <a href="${repo.contributors_url}">
-          <span class="badge badge-primary">Contributors: </span> 
-            </a>  
-          <a href="${repo.issues_url}" target="blank">
-            <span class="badge badge-success">Issues: ${repo.open_issues_count}</span>
-          </a>
-          </div>
-        </div>
-      </div>`;
+        t.clear() //9. limpa a tabela para fazer uma nova pesquisa
+          .draw();
+
+        $(resp).each(function (index, element) {
+          //7. Foreach no array utilizando o jQuery
+          bindItemToTable(element);
+        });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  function bindItemToTable(item) {
+    const urlContributor = item.contributors_url;
+    const urlIssue = item.issues_url;
+
+    const contributorTagLink = `<a
+      class="btnContributor badge badge-primary p-2" 
+      data-toggle="modal" 
+      data-target="#contributorsModal" 
+      data-url="{url}" 
+      href="#" >Contributors
+    </a>`;
+    const issueTagLink = `<a
+     class="btnIssue badge badge-info p-2" 
+     data-toggle="modal" 
+      data-target="#issuesModal" 
+     data-url="{url}" 
+     href="#">Issues</a>`;
+
+    const btnContributors = contributorTagLink.replace("{url}", urlContributor);
+    const btnIssue = issueTagLink.replace("{url}", urlIssue);
+
+    t.row.add([
+      //8. Adiciona linha para cada item da resposta
+      item.id,
+      item.name,
+      btnContributors,
+      btnIssue,
+    ]);
+    t.draw();
   }
-}
 
-search.addEventListener("keyup", (event) => {
-  const repos = event.target.value;
-
-  repos.length > 0
-    ? getRepository(repos).then((res) => console.log(res))
-    : null;
-
-  console.log(repos);
+  $("#search").change(function () {
+    //3. Pega o valor digitado
+    const text = $("#search").val();
+    getRepositories(text); //4 Passa para a função de busca
+  });
 });
-
-
-
-
